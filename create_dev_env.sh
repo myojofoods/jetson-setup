@@ -70,6 +70,7 @@ echo ">>> Please re-login to enable group settings"
 #setting sudoers for app--------------------------------------------
 echo "**************************************************************"
 echo ">>> Edit sudoers for easy access to jetson_clocks and npvmodel for application"
+echo ">>> sudo visudoを実行し、/etc/sudoerに以下を追記して下さい"
 echo "#Easy access to jetson_clocks and npvmodel for application"
 echo "%sudo   ALL=NOPASSWD: /usr/bin/jetson_clocks"
 echo "%sudo   ALL=NOPASSWD: /usr/sbin/nvpmodel"
