@@ -15,6 +15,8 @@ echo ">>> Setting python3 as default"
 cd /usr/bin
 sudo unlink python
 sudo ln -s python3 python
+sudo apt install python-pip
+python -m pip install -U pip
 
 #UnixBench----------------------------------------------------------
 echo ""
@@ -33,8 +35,6 @@ python jetsonInfo.py
 #Jetson stats-------------------------------------------------------
 echo ""
 echo ">>> Installing Jetson stats (launch with jtop)"
-sudo apt install python-pip
-sudo pip install -U pip
 sudo pip install jetson-stats
 echo ">>> Reboot to enable jetson-stats"
 
