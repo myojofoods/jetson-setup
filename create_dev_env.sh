@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #update-------------------------------------------------------------
-sudo apt update 
+sudo apt update
 sudo apt upgrade -y
 
 #SDcard settings----------------------------------------------------
@@ -15,6 +15,8 @@ echo ">>> Setting python3 as default"
 cd /usr/bin
 sudo unlink python
 sudo ln -s python3 python
+sudo apt install python-pip
+python -m pip install -U pip
 
 #UnixBench----------------------------------------------------------
 echo ""
@@ -33,8 +35,6 @@ python jetsonInfo.py
 #Jetson stats-------------------------------------------------------
 echo ""
 echo ">>> Installing Jetson stats (launch with jtop)"
-sudo apt install python-pip
-sudo pip install -U pip
 sudo pip install jetson-stats
 echo ">>> Reboot to enable jetson-stats"
 
@@ -50,7 +50,7 @@ git clone https://github.com/tsutof/jetson-thermal-monitor
 echo ""
 echo ">>> Setting for remote desktop environment"
 sudo apt install -y xrdp
-echo lxsession > ~/.xsession
+echo lxsession >~/.xsession
 echo ">>> Set IP address manually and after chaging the IP adress, you can connect this device from remote desktop."
 
 #Docker-Compose settings--------------------------------------------
@@ -60,18 +60,18 @@ sudo apt install -y curl python3-testresources
 curl -kL https://bootstrap.pypa.io/get-pip.py | python3
 python3 -m pip install --user docker-compose
 
-echo '' >> ~/.bashrc
-echo '#added for docker compose' >> ~/.bashrc
-echo 'PATH=$PATH:$HOME/.local/bin' >> ~/.bashrc
+echo '' >>~/.bashrc
+echo '#added for docker compose' >>~/.bashrc
+echo 'PATH=$PATH:$HOME/.local/bin' >>~/.bashrc
 source ~/.bashrc
 sudo gpasswd -a $USER docker
 echo ">>> Please re-login to enable group settings"
 
 #setting sudoers for app--------------------------------------------
-cat << EOF
+cat <<EOF
 
 >>> Edit sudoers for easy access to jetson_clocks and nvpmodel for application.
->>> Use visudo and write following settings.
+>>> Use "sudo visudo" command and write following settings to /etc/sudoer
 **************************************************************
 # Easy access to jetson_clocks and nvpmodel for application
 %sudo   ALL=NOPASSWD: /usr/bin/jetson_clocks
@@ -83,7 +83,7 @@ EOF
 read -r -p "Press [Enter] if it's done."
 
 #setting env for app--------------------------------------------
-cat << EOF
+cat <<EOF
 
 >>> Add following settings to ~/.profile for application.
 >>> Please replace <> with appropriate settings (Refer to jtop command).
@@ -99,14 +99,12 @@ export TENSORRT_VERSION=<TENSORRT_VERSION>
 EOF
 read -r -p "Press [Enter] if it's done."
 
-
 #VS Code------------------------------------------------------------
-cat << EOF
+cat <<EOF
 
 >>> Setup vscode from here
 https://code.visualstudio.com/#alt-downloads
 
 EOF
-
 
 read -r -p "Press [Enter] key to finish."
