@@ -68,20 +68,45 @@ sudo gpasswd -a $USER docker
 echo ">>> Please re-login to enable group settings"
 
 #setting sudoers for app--------------------------------------------
-echo "**************************************************************"
-echo ">>> Edit sudoers for easy access to jetson_clocks and npvmodel for application"
-echo "#Easy access to jetson_clocks and npvmodel for application"
-echo "%sudo   ALL=NOPASSWD: /usr/bin/jetson_clocks"
-echo "%sudo   ALL=NOPASSWD: /usr/sbin/nvpmodel"
-echo "%sudo   ALL=NOPASSWD: /sbin/ifconfig"
-echo "%sudo   ALL=NOPASSWD: /sbin/sysctl"
-echo "**************************************************************"
+cat << EOF
+
+>>> Edit sudoers for easy access to jetson_clocks and nvpmodel for application.
+>>> Use visudo and write following settings.
+**************************************************************
+# Easy access to jetson_clocks and nvpmodel for application
+%sudo   ALL=NOPASSWD: /usr/bin/jetson_clocks
+%sudo   ALL=NOPASSWD: /usr/sbin/nvpmodel
+%sudo   ALL=NOPASSWD: /sbin/ifconfig
+%sudo   ALL=NOPASSWD: /sbin/sysctl
+**************************************************************
+EOF
+read -r -p "Press [Enter] if it's done."
+
+#setting env for app--------------------------------------------
+cat << EOF
+
+>>> Add following settings to ~/.profile for application.
+>>> Please replace <> with appropriate settings (Refer to jtop command).
+**************************************************************"
+# added for application
+sudo nvpmodel -m <JETSON_CLOCKS_MODE>
+sudo jetson_clocks
+
+export L4T_CONTAINER_VERSION=<L4T_CONTAINER_VERSION>
+export CUDA_ARCH_VERSION=<CUDA_ARCH_VERSION>
+export TENSORRT_VERSION=<TENSORRT_VERSION>
+**************************************************************"
+EOF
+read -r -p "Press [Enter] if it's done."
+
 
 #VS Code------------------------------------------------------------
-echo "**************************************************************"
-echo ">>> Setup vscode from here"
-echo "https://code.visualstudio.com/#alt-downloads"
-echo "**************************************************************"
+cat << EOF
 
-echo
+>>> Setup vscode from here
+https://code.visualstudio.com/#alt-downloads
+
+EOF
+
+
 read -r -p "Press [Enter] key to finish."
