@@ -72,13 +72,13 @@ cat <<EOF
 
 >>> Edit sudoers for easy access to jetson_clocks and nvpmodel for application.
 >>> Use "sudo visudo" command and write following settings to /etc/sudoer
-**************************************************************
+##############################################################
 # Easy access to jetson_clocks and nvpmodel for application
 %sudo   ALL=NOPASSWD: /usr/bin/jetson_clocks
 %sudo   ALL=NOPASSWD: /usr/sbin/nvpmodel
 %sudo   ALL=NOPASSWD: /sbin/ifconfig
 %sudo   ALL=NOPASSWD: /sbin/sysctl
-**************************************************************
+##############################################################
 EOF
 read -r -p "Press [Enter] if it's done."
 
@@ -87,7 +87,7 @@ cat <<EOF
 
 >>> Add following settings to ~/.profile for application.
 >>> Please replace <> with appropriate settings (Refer to jtop command).
-**************************************************************"
+##############################################################
 # added for application
 sudo nvpmodel -m <JETSON_CLOCKS_MODE>
 sudo jetson_clocks
@@ -95,7 +95,7 @@ sudo jetson_clocks
 export L4T_CONTAINER_VERSION=<L4T_CONTAINER_VERSION>
 export CUDA_ARCH_VERSION=<CUDA_ARCH_VERSION>
 export TENSORRT_VERSION=<TENSORRT_VERSION>
-**************************************************************"
+##############################################################
 EOF
 read -r -p "Press [Enter] if it's done."
 
